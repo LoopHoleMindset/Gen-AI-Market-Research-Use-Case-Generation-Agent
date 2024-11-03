@@ -1,6 +1,6 @@
 import requests
 import json
-from fpdf import FPDF
+from fpdf2 import FPDF
 import os
 
 
