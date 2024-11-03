@@ -232,7 +232,7 @@ class PDFReport(FPDF):
 
 
 def main():
-    api_key = 'd1964ac11e1a10b92815bbac45b44dc8d7af7024'  # Replace with your actual API key
+    api_key = 'API_KEY'  # Replace with your actual API key
     industry = "Apple Inc."  # Updated to focus on Apple Inc.
 
     research_agent = ResearchAgent(api_key)
