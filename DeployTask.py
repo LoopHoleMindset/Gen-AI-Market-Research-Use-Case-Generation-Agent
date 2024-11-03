@@ -1,5 +1,4 @@
 import streamlit as st
-# from fpdf2 import FPDF
 import requests
 import json
 import os
@@ -42,30 +41,6 @@ class UseCaseAgent:
         return use_cases
 
 
-# # PDF Report class
-# class PDFReport(FPDF):
-#     def __init__(self):
-#         super().__init__()
-
-#     def header(self):
-#         self.set_font('Arial', 'B', 12)
-#         self.cell(0, 10, 'AI and ML Use Cases Report', 0, 1, 'C')
-#         self.ln(10)
-
-#     def add_use_case(self, use_case):
-#         self.set_font('Arial', 'B', 10)
-#         self.cell(0, 10, f"Use Case: {use_case['title']}", 0, 1)
-#         self.set_font('Arial', '', 10)
-#         self.cell(0, 10, "Objective:", 0, 1)
-#         self.multi_cell(0, 10, use_case["objective"])
-#         self.cell(0, 10, "Application:", 0, 1)
-#         self.multi_cell(0, 10, use_case["application"])
-#         self.cell(0, 10, "Cross-Functional Benefits:", 0, 1)
-#         for benefit in use_case["benefits"]:
-#             self.multi_cell(0, 10, f"- {benefit}")
-#         self.ln(10)
-
-
 # Streamlit interface
 def main():
     st.title("AI and ML Use Cases Generator")
@@ -82,17 +57,6 @@ def main():
                 use_case_agent = UseCaseAgent()
                 use_cases = use_case_agent.generate_use_cases(industry_info)
 
-                # # Create PDF
-                # pdf = PDFReport()
-                # pdf.add_page()
-                # for case in use_cases:
-                #     pdf.add_use_case(case)
-
-                # # Save and display PDF
-                # pdf_output_path = "/tmp/Report.pdf"
-                # pdf.output(pdf_output_path)
-                # with open(pdf_output_path, "rb") as pdf_file:
-                #     st.download_button("Download Report", pdf_file, file_name="AI_Report.pdf")
         else:
             st.error("Please enter both API Key and Industry Name")
 
