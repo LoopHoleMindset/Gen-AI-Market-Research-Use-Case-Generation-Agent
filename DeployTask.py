@@ -1,5 +1,5 @@
 import streamlit as st
-from fpdf2 import FPDF
+# from fpdf2 import FPDF
 import requests
 import json
 import os
@@ -82,17 +82,17 @@ def main():
                 use_case_agent = UseCaseAgent()
                 use_cases = use_case_agent.generate_use_cases(industry_info)
 
-                # Create PDF
-                pdf = PDFReport()
-                pdf.add_page()
-                for case in use_cases:
-                    pdf.add_use_case(case)
+                # # Create PDF
+                # pdf = PDFReport()
+                # pdf.add_page()
+                # for case in use_cases:
+                #     pdf.add_use_case(case)
 
-                # Save and display PDF
-                pdf_output_path = "/tmp/Report.pdf"
-                pdf.output(pdf_output_path)
-                with open(pdf_output_path, "rb") as pdf_file:
-                    st.download_button("Download Report", pdf_file, file_name="AI_Report.pdf")
+                # # Save and display PDF
+                # pdf_output_path = "/tmp/Report.pdf"
+                # pdf.output(pdf_output_path)
+                # with open(pdf_output_path, "rb") as pdf_file:
+                #     st.download_button("Download Report", pdf_file, file_name="AI_Report.pdf")
         else:
             st.error("Please enter both API Key and Industry Name")
 
