@@ -42,28 +42,28 @@ class UseCaseAgent:
         return use_cases
 
 
-# PDF Report class
-class PDFReport(FPDF):
-    def __init__(self):
-        super().__init__()
+# # PDF Report class
+# class PDFReport(FPDF):
+#     def __init__(self):
+#         super().__init__()
 
-    def header(self):
-        self.set_font('Arial', 'B', 12)
-        self.cell(0, 10, 'AI and ML Use Cases Report', 0, 1, 'C')
-        self.ln(10)
+#     def header(self):
+#         self.set_font('Arial', 'B', 12)
+#         self.cell(0, 10, 'AI and ML Use Cases Report', 0, 1, 'C')
+#         self.ln(10)
 
-    def add_use_case(self, use_case):
-        self.set_font('Arial', 'B', 10)
-        self.cell(0, 10, f"Use Case: {use_case['title']}", 0, 1)
-        self.set_font('Arial', '', 10)
-        self.cell(0, 10, "Objective:", 0, 1)
-        self.multi_cell(0, 10, use_case["objective"])
-        self.cell(0, 10, "Application:", 0, 1)
-        self.multi_cell(0, 10, use_case["application"])
-        self.cell(0, 10, "Cross-Functional Benefits:", 0, 1)
-        for benefit in use_case["benefits"]:
-            self.multi_cell(0, 10, f"- {benefit}")
-        self.ln(10)
+#     def add_use_case(self, use_case):
+#         self.set_font('Arial', 'B', 10)
+#         self.cell(0, 10, f"Use Case: {use_case['title']}", 0, 1)
+#         self.set_font('Arial', '', 10)
+#         self.cell(0, 10, "Objective:", 0, 1)
+#         self.multi_cell(0, 10, use_case["objective"])
+#         self.cell(0, 10, "Application:", 0, 1)
+#         self.multi_cell(0, 10, use_case["application"])
+#         self.cell(0, 10, "Cross-Functional Benefits:", 0, 1)
+#         for benefit in use_case["benefits"]:
+#             self.multi_cell(0, 10, f"- {benefit}")
+#         self.ln(10)
 
 
 # Streamlit interface
