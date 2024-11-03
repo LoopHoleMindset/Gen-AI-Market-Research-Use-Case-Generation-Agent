@@ -1,9 +1,8 @@
 import streamlit as st
 import requests
 import json
-import os
 
-# Class for fetching company-specific data
+# Class for fetching industry data
 class ResearchAgent:
     def __init__(self, api_key):
         self.api_key = api_key
@@ -24,62 +23,101 @@ class ResearchAgent:
             return None
 
 
-# Flexible UseCaseAgent for dynamic generation
+# Class for generating a variety of use cases dynamically
 class UseCaseAgent:
     def generate_use_cases(self, company_info, company_name, focus_areas=None):
         use_cases = []
 
-        # Determine industry context from API response if available
         if company_info and 'organic' in company_info and len(company_info['organic']) > 0:
             industry_info = company_info['organic'][0]['snippet']
         else:
             industry_info = f"{company_name}'s industry"
 
-        # Default focus areas if none provided by user
         if not focus_areas:
-            focus_areas = ["customer experience", "supply chain", "predictive maintenance", "cybersecurity"]
+            focus_areas = ["customer experience", "supply chain", "predictive maintenance", "cybersecurity", 
+                           "HR management", "financial forecasting", "product development", "marketing optimization", 
+                           "environmental impact", "quality control"]
 
-        # Generate use cases based on focus areas
+        # Use cases based on different functional areas
         for focus in focus_areas:
             if "customer experience" in focus:
                 use_cases.append({
                     "title": "Personalized Customer Experience",
-                    "objective": f"Create a personalized recommendation system tailored for {company_name}'s customer base.",
-                    "application": f"Using AI to analyze customer preferences in {industry_info} and deliver targeted suggestions.",
-                    "benefits": ["Increased customer satisfaction", "Higher sales conversions"]
+                    "objective": f"Enhance customer satisfaction for {company_name}.",
+                    "application": f"Use AI to analyze customer preferences and deliver personalized interactions in {industry_info}.",
+                    "benefits": ["Improved customer satisfaction", "Higher retention rates", "Increased revenue"]
                 })
 
             if "supply chain" in focus:
                 use_cases.append({
-                    "title": "Supply Chain Optimization",
-                    "objective": f"Improve supply chain operations for {company_name}.",
-                    "application": f"Leverage AI for inventory management, demand forecasting, and logistics optimization in {industry_info}.",
-                    "benefits": ["Reduced operational costs", "Enhanced inventory management"]
+                    "title": "AI-Driven Supply Chain Optimization",
+                    "objective": "Optimize supply chain and logistics.",
+                    "application": f"Using AI to forecast demand, manage inventory, and optimize routes in {industry_info}.",
+                    "benefits": ["Cost savings", "Improved efficiency", "Reduced waste"]
                 })
 
             if "predictive maintenance" in focus:
                 use_cases.append({
                     "title": "Predictive Maintenance",
-                    "objective": f"Implement predictive maintenance for {company_name}'s critical equipment.",
-                    "application": f"AI algorithms analyze equipment data to predict maintenance needs before failures occur in {industry_info}.",
-                    "benefits": ["Reduced downtime", "Extended equipment lifespan"]
+                    "objective": "Reduce equipment downtime through AI-driven maintenance predictions.",
+                    "application": f"Analyze sensor data to predict and schedule maintenance in {industry_info}.",
+                    "benefits": ["Reduced downtime", "Lower maintenance costs", "Extended asset lifespan"]
                 })
 
             if "cybersecurity" in focus:
                 use_cases.append({
-                    "title": "Enhanced Cybersecurity",
-                    "objective": f"Strengthen cybersecurity for {company_name}'s data and infrastructure.",
-                    "application": f"Using AI to monitor network activity, detect anomalies, and prevent security breaches in {industry_info}.",
-                    "benefits": ["Improved data protection", "Reduced risk of cyber attacks"]
+                    "title": "Enhanced Cybersecurity Measures",
+                    "objective": "Strengthen data security and prevent cyber attacks.",
+                    "application": f"Using AI to detect anomalies and potential threats in {industry_info}.",
+                    "benefits": ["Improved security", "Reduced risk of data breaches", "Enhanced trust"]
                 })
 
-            # Add more customizable areas based on API response insights
-            if company_info and "innovation" in focus:
+            if "HR management" in focus:
                 use_cases.append({
-                    "title": "Product Innovation with AI",
-                    "objective": f"Develop innovative AI-driven products tailored to {company_name}'s target market.",
-                    "application": f"AI can help identify new product trends and enhance product features within {industry_info}.",
-                    "benefits": ["Competitive edge", "Higher customer engagement"]
+                    "title": "AI-Driven HR Management",
+                    "objective": "Optimize talent acquisition and employee engagement.",
+                    "application": f"Using AI to screen resumes, predict employee turnover, and personalize engagement strategies in {industry_info}.",
+                    "benefits": ["Better talent acquisition", "Increased employee satisfaction", "Lower turnover"]
+                })
+
+            if "financial forecasting" in focus:
+                use_cases.append({
+                    "title": "Financial Forecasting and Risk Analysis",
+                    "objective": "Enhance financial forecasting accuracy and risk management.",
+                    "application": f"Using AI for predictive financial modeling, risk assessments, and fraud detection in {industry_info}.",
+                    "benefits": ["Improved financial planning", "Reduced risk", "Enhanced decision-making"]
+                })
+
+            if "product development" in focus:
+                use_cases.append({
+                    "title": "Product Development and Innovation",
+                    "objective": "Accelerate product development with AI insights.",
+                    "application": f"Using AI to identify market trends, optimize product features, and streamline R&D in {industry_info}.",
+                    "benefits": ["Faster time-to-market", "Improved product-market fit", "Competitive advantage"]
+                })
+
+            if "marketing optimization" in focus:
+                use_cases.append({
+                    "title": "Targeted Marketing and Customer Insights",
+                    "objective": "Refine marketing strategies for higher conversion rates.",
+                    "application": f"Using AI for customer segmentation, personalized campaigns, and sentiment analysis in {industry_info}.",
+                    "benefits": ["Improved targeting", "Higher ROI on marketing spend", "Enhanced customer loyalty"]
+                })
+
+            if "environmental impact" in focus:
+                use_cases.append({
+                    "title": "Environmental Impact Reduction",
+                    "objective": "Leverage AI to reduce environmental footprint.",
+                    "application": f"Using AI to monitor emissions, optimize resource use, and manage waste in {industry_info}.",
+                    "benefits": ["Lower carbon footprint", "Cost savings from efficiency", "Enhanced corporate social responsibility"]
+                })
+
+            if "quality control" in focus:
+                use_cases.append({
+                    "title": "Automated Quality Control",
+                    "objective": "Improve quality control in production processes.",
+                    "application": f"Using AI for defect detection, quality assurance, and process optimization in {industry_info}.",
+                    "benefits": ["Consistent product quality", "Reduced waste", "Increased customer satisfaction"]
                 })
 
         return use_cases
@@ -93,7 +131,9 @@ def main():
     company_name = st.text_input("Enter Company Name:")
     industry = st.text_input("Enter Industry Name:")
     focus_areas = st.multiselect("Select Focus Areas", 
-                                 ["customer experience", "supply chain", "predictive maintenance", "cybersecurity", "innovation"])
+                                 ["customer experience", "supply chain", "predictive maintenance", "cybersecurity", 
+                                  "HR management", "financial forecasting", "product development", "marketing optimization", 
+                                  "environmental impact", "quality control"])
 
     if st.button("Generate Report"):
         if api_key and company_name and industry:
